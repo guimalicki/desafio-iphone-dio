@@ -1,83 +1,23 @@
-package iphone;
-
+package reprodutormusical;
 
 import java.util.Locale;
 import java.util.Scanner;
-import aparelhotelefonico.AparelhoTelefonico;
-import navegadorinternet.NavegadorInternet;
-import reprodutormusical.ReprodutorMusical;
 
-
-public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTelefonico {
+public abstract class Ipod implements ReprodutorMusical{
 
     private String musicaAtual = null;
     private String ultimaMusica = null;
     private int volume = 10;
 
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in).useLocale(Locale.US);
-        
-        //declarando um novo Iphone
-        Iphone iphone = new Iphone(); 
-
-        System.out.println("O que deseja fazer?");
-        sc.close();
-    }
-
-    @Override
-    public void ligar(String numero) {
-        System.out.println("Ligando para o número: " + numero);
-    }
-
-    @Override
-    public void atender() {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Deseja atender o telefone? (Sim/Não)");
-        String sn = sc.next();
-        sc.close();
-        switch (sn) {
-            case "Sim":
-                System.out.println("Atendido");
-                break;
-            case "Não":
-                System.out.println("Rejeitado");
-                break;
-            default:
-                break;
-        }
+    public void ligarAparelho() { //Destinado a ligar o iPod
+        setAparelhoLigado(true);
 
     }
-
-    @Override
-    public void iniciarConversa() {
-        System.out.println("Iniciando conversa.");;
+    
+    public void desligarAparelho() {
+        setAparelhoLigado(false); //Destinado a desligar o iPod
     }
 
-    @Override
-    public void SalvarNumero(String numero, String nome) {
-        System.out.println("Contato de nome " + nome + " e número " + numero + " Salvo na agenda.");
-    }
-
-    @Override
-    public void exibirPagina(String url) {
-        System.out.println("Por favor, aguarde.");
-        System.out.println("Concluido");
-    }
-
-    @Override
-    public void adicionarAba() {
-        System.out.println("Nova guia");
-    }
-
-    @Override
-    public void atualizarPagina() {
-        System.out.println("Por favor, aguarde");
-        System.out.println("Pagina atualizada");
-    }
-
-    @Override
     public void tocar() {
         if (getMusicaAtual() == null){
             if (getUltimaMusica() == null){ //Se não tiver nenhuma música anterior e atual
@@ -91,13 +31,12 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
         }
     }
 
-    @Override
     public void pausar() {
         System.out.println("Musica pausada");
     }
 
-    @Override
     public void selecionarMusica() {
+
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         setUltimaMusica(getMusicaAtual()); //atualiza o status da ultima música para a musica que esta tocando até o presente momento.
         System.out.println("Digite o nome da música");
@@ -106,43 +45,31 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
         buscarMusica(musica);
     }
 
-    @Override
     public void buscarMusica(String musica) {
         System.out.println("Buscando musica...");
         System.out.println("Música " + musica + " encontrada!");
         setMusicaAtual(musica); //atualiza a Música Atual para a música procurada;
     }
 
-    @Override
-    public void ligarAparelho() {
-        setAparelhoLigado(true);
-    }
-
-    @Override
-    public void desligarAparelho() {
-        setAparelhoLigado(false);
-    }
-
-    @Override
     public void aumentarVolume() {
         setVolume(getVolume() + 1);
         System.out.println("Volume: " + getVolume());
     }
 
-    @Override
     public void diminuirVolume() {
         setVolume(getVolume() - 1);
         System.out.println("Volume: " + getVolume());
     }
 
+
+    //Getters e Setters
     public void setAparelhoLigado(boolean aparelhoLigado) {
         if(aparelhoLigado == true){
             System.out.println("Ligando...");
             System.out.println("iPod Ligado");
         } else System.out.println("Desligando...");
     }
-
-    //Getters e Setters
+    
     public String getMusicaAtual() {
         return musicaAtual;
     }
@@ -159,7 +86,6 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
         this.ultimaMusica = ultimaMusica;
     }
 
-
     public int getVolume() {
         return volume;
     }
@@ -167,4 +93,5 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
     public void setVolume(int volume) {
         this.volume = volume;
     }
+
 }
