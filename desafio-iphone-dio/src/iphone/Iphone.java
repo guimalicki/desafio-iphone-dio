@@ -22,6 +22,18 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
         Iphone iphone = new Iphone(); 
 
         System.out.println("O que deseja fazer?");
+        System.out.println("(1) - Tocar Musica");
+        int escolha = sc.nextInt();
+
+        switch (escolha) {
+            case 1:
+                iphone.tocar();
+                break;
+        
+            default:
+                break;
+        }
+
         sc.close();
     }
 
@@ -101,7 +113,7 @@ public class Iphone implements ReprodutorMusical, NavegadorInternet,  AparelhoTe
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         setUltimaMusica(getMusicaAtual()); //atualiza o status da ultima música para a musica que esta tocando até o presente momento.
         System.out.println("Digite o nome da música");
-        String musica = sc.next();
+        String musica = sc.nextLine();
         sc.close();
         buscarMusica(musica);
     }
